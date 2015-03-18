@@ -13,11 +13,11 @@ nodes:
       - shell:
           path: provision/bootstrap.sh
           arguments:
-            - value: master
+            - value: vagrant
       - shell:
           path: provision/bootstrap_r10k.sh
           arguments:
-            - value: master
+            - value: vagrant
     synced_folders:
       - host: .
         guest: /vagrant
