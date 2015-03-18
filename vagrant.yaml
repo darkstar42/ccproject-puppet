@@ -11,7 +11,7 @@ nodes:
           ip: 192.168.42.10
     provisioners:
       - shell:
-          path: provision/bootstrap.sh
+          path: provision/bootstrap_master.sh
           arguments:
             - value: vagrant
       - shell:
