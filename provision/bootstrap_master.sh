@@ -10,6 +10,10 @@ if [ "$1" == 'vagrant' ]; then
 192.168.42.10 puppet.vagrant.vm puppet
 192.168.42.20 agent
 EOH
+else
+    HOSTNAME="puppet.cc.gernox.de"
+    hostname $HOSTNAME
+    echo $HOSTNAME > /etc/hostname
 fi
 
 echo "Bootstrapping Puppet Master..."
