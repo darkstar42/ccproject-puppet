@@ -1,0 +1,23 @@
+boxes:
+  ubuntu/trusty64: "ubuntu/trusty64"
+nodes:
+  pmaster:
+    hostname: puppet.cc.gernox.de
+    box: ubuntu/trusty64
+    memory: 512
+    cpus: 1
+    networks:
+      - private_network:
+          ip: 192.168.42.10
+    provisioners:
+      - shell:
+          path: provision/bootstrap.sh
+          arguments:
+            - value: master
+      - shell:
+          path: provision/bootstrap_r10k.sh
+          arguments:
+            - value: master
+    synced_folders:
+      - host: .
+        guest: /vagrant

@@ -1,0 +1,6 @@
+---
+puppetmaster: puppet.cc.gernox.de
+
+unattendedUpgrades::origins:
+    - 'origin=Debian,archive=stable,label=Debian-Security'
+

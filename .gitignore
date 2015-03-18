@@ -1,0 +1,8 @@
+# Webstorm
+.idea
+
+# Vagrant
+.vagrant
+
+/modules
+install_log*
