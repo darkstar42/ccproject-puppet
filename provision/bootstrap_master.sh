@@ -12,8 +12,11 @@ if [ "$1" == 'vagrant' ]; then
 EOH
 else
     HOSTNAME="puppet.cc.gernox.de"
+    IP=`ifconfig eth0 | awk -F"[: ]+" '/inet addr:/ {print $4}'`
+
     hostname $HOSTNAME
     echo $HOSTNAME > /etc/hostname
+    echo ${IP} puppet.cc.gernox.de puppet >> /etc/hosts
 fi
 
 echo "Bootstrapping Puppet Master..."
