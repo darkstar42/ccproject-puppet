@@ -4,6 +4,18 @@ rm -rf /etc/puppet/environments/*
 
 /usr/bin/puppet module install zack-r10k
 
+cat > /etc/puppet/hiera.yaml <<EOH
+---
+:backends:
+    - yaml
+:yaml:
+    :datadir: /etc/puppet/environments/%{::environment}/hieradata
+:hierarchy:
+    - "nodes/%{::clientcert}"
+    - "role/%{role}"
+    - "common"
+EOH
+
 cat > /tmp/newsite.pp <<EOM
 case $::virtual {
   'virtualbox': {
@@ -29,7 +41,7 @@ class { 'r10k':
 
 ini_setting { 'basemodulepath':
   ensure  => 'present',
-  path    => "\${::settings::confdir}/puppet.conf}",
+  path    => "\${::settings::confdir}/puppet.conf",
   section => 'main',
   setting => 'basemodulepath',
   value   => "\${::settings::confdir}/modules:/usr/share/puppet/modules",
@@ -41,22 +53,6 @@ ini_setting { 'environmentpath':
   section => 'main',
   setting => 'environmentpath',
   value   => "\${::settings::confdir}/environments",
-}
-
-ini_setting { 'environment.conf modulepath':
-  ensure  => 'present',
-  path    => "\${::settings::confdir}/environment.conf",
-  section => '',
-  setting => 'modulepath',
-  value   => "site:modules:\$basemodulepath",
-}
-
-ini_setting { 'environment.conf timeout':
-  ensure  => 'present',
-  path    => "\${::settings::confdir}/environment.conf",
-  section => '',
-  setting => 'environment_timeout',
-  value   => '0',
 }
 EOM
 
