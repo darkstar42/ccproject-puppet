@@ -43,7 +43,7 @@ class profile::puppet::master (
   class { '::puppet::master':
     storeconfigs    => true,
     reports         => 'store,puppetdb',
-    environmentpath => "${::settings::confdir}/environments"
+    environments    => 'directory',
   }
 
   class { '::puppet::agent':
