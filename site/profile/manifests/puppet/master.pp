@@ -46,11 +46,7 @@ class profile::puppet::master (
     environments    => 'directory',
   }
 
-  class { '::puppet::agent':
-    puppet_server             => 'puppet.cc.gernox.de',
-    environment               => 'production',
-    templatedir               => undef,
-  }
+  include puppet::agent
 
   class { 'apache::mod::wsgi': }
 
