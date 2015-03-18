@@ -35,4 +35,20 @@ class profile::puppet::master (
       path    => "${::settings::confdir}/autosign.conf"
     }
   }
+
+  class { '::puppetdb':
+    database => 'embedded',
+  }
+
+  class { '::puppet::master':
+    storeconfigs    => true,
+    reports         => 'store,puppetdb',
+    environmentpath => "${::settings::confdir}/environments"
+  }
+
+  class { '::puppet::agent':
+    puppet_server             => 'puppet.cc.gernox.de',
+    environment               => 'production',
+    templatedir               => undef,
+  }
 }
