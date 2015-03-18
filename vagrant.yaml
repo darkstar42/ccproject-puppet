@@ -4,7 +4,7 @@ nodes:
   pmaster:
     hostname: puppet.cc.gernox.de
     box: ubuntu/trusty64
-    memory: 512
+    memory: 1024
     cpus: 1
     networks:
       - private_network:
