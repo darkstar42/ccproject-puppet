@@ -51,4 +51,15 @@ class profile::puppet::master (
     environment               => 'production',
     templatedir               => undef,
   }
+
+  class { 'apache': }
+  class { 'apache::mod::wsgi': }
+
+  class { 'puppetboard':
+    manage_git        => true,
+    manage_virtualenv => true,
+    reports_count     => 40,
+  }
+
+  class { 'puppetboard::apache::conf': }
 }
