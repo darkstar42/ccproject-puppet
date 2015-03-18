@@ -2,7 +2,7 @@ boxes:
   ubuntu/trusty64: "ubuntu/trusty64"
 nodes:
   pmaster:
-    hostname: puppet.cc.gernox.de
+    hostname: puppet.vagrant.vm
     box: ubuntu/trusty64
     memory: 1024
     cpus: 1

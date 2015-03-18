@@ -1,0 +1,4 @@
+---
+puppetmaster: puppet.vagrant.vm
+role: 'role::puppet::master'
+

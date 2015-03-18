@@ -1,6 +1,6 @@
 class profile::puppet::agent (
-  $master = 'puppet',
-  $environment = 'production'
+  $master = hiera('puppetmaster'),
+  $environment = hiera('environment')
 ) {
   validate_string($master, $environment)
 

@@ -8,7 +8,7 @@ echo "TODO"
 cat > /etc/hosts <<EOH
 127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain
 ::1 localhost localhost.localdomain localhost6 localhost6.localdomain
-192.168.42.10 puppet.cc.gernox.de puppet
+192.168.42.10 puppet.vagrant.vm puppet
 192.168.42.20 agent
 EOH
 

@@ -1,5 +1,6 @@
 ---
 puppetmaster: puppet.cc.gernox.de
+environment: production
 
 unattendedUpgrades::origins:
     - 'origin=Debian,archive=stable,label=Debian-Security'
