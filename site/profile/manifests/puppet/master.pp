@@ -14,18 +14,6 @@ class profile::puppet::master (
     group => 'root'
   }
 
-  class { 'hiera':
-    hierarchy => [
-      'nodes/%{::clientcert}',
-      'role/%{role}',
-      'common'
-    ],
-    datadir   => $profile::puppet::params::hieradir,
-    backends  => $backends,
-    eyaml     => $hiera_eyaml,
-    notify    => Service['puppetmaster']
-  }
-
   class { 'r10k':
     version           => $r10k_version,
     sources           => {
@@ -37,8 +25,7 @@ class profile::puppet::master (
     },
     purgedirs         => [$environmentpath],
     manage_modulepath => false,
-    mcollective       => false,
-    notify            => Service['puppetmaster']
+    mcollective       => false
   }
 
   if $autosign {
@@ -47,23 +34,5 @@ class profile::puppet::master (
       content => '*.vagrant.vm',
       path    => "${::settings::confdir}/autosign.conf"
     }
-  }
-
-  ini_setting { 'basemodulepath':
-    ensure  => 'present',
-    path    => "${::settings::confdir}/puppet.conf}",
-    section => 'main',
-    setting => 'basemodulepath',
-    value   => $profile::puppet::params::basemodulepath,
-    notify  => Service['puppetmaster']
-  }
-
-  ini_setting { 'environmentpath':
-    ensure  => 'present',
-    path    => "${::settings::confdir}/puppet.conf",
-    section => 'main',
-    setting => 'environmentpath',
-    value   => $environmentpath,
-    notify  => Service['puppetmaster']
   }
 }
