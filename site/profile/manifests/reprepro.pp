@@ -59,6 +59,6 @@ class profile::reprepro {
   file { '/var/lib/apt/repo/localpkgs/deployment.gpg':
     ensure  => present,
     owner   => 'reprepro',
-    content => 'puppet:///modules/profile/reprepro/public.key',
+    source  => 'puppet:///modules/profile/reprepro/public.key',
   }
 }
