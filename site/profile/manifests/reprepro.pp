@@ -1,8 +1,8 @@
 class profile::reprepro {
-  # Base Directory shortcut
+# Base Directory shortcut
   $basedir = '/var/lib/apt/repo'
 
-  # Main reprepro class
+# Main reprepro class
   class { '::reprepro':
     basedir => $basedir,
   }->
@@ -41,10 +41,10 @@ class profile::reprepro {
   }
 
   apache::vhost { 'deploy.cc.gernox.de':
-    port           => '80',
-    docroot        => '/var/lib/apt/repo/localpkgs',
-    manage_docroot => false,
-    require        => Reprepro::Distribution['trusty'],
+    port            => '80',
+    docroot         => '/var/lib/apt/repo/localpkgs',
+    manage_docroot  => false,
+    require         => Reprepro::Distribution['trusty'],
     custom_fragment => '
 <Directory /var/lib/apt/repo/localpkgs/conf>
   Order Deny,Allow
@@ -55,5 +55,10 @@ class profile::reprepro {
   Order Deny,Allow
   Deny from All
 </Directory>',
+  }->
+  file { '/var/lib/apt/repo/localpkgs/deployment.gpg':
+    ensure  => present,
+    owner   => 'reprepro',
+    content => 'puppet:///modules/profile/puppet/master/deploymentKey_pub',
   }
 }
