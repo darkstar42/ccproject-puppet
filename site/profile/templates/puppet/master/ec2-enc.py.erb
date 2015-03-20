@@ -18,6 +18,7 @@ print "---"
 
 if sys.argv[1].lower() == 'puppet.cc.gernox.de':
   print "classes:\n  %s:" % (GROUPS['ccproject-puppet'])
+  print "role: '%s'" % (GROUPS['ccproject-puppet'])
 else:
   for r in conn.get_all_instances():
     for i in r.instances:
@@ -26,3 +27,4 @@ else:
         if i.private_dns_name.lower() ==  sys.argv[1].lower():
           # print "match! " + str(i.groups[0].name)
           print "classes:\n  %s:" % (GROUPS[i.groups[0].name])
+          print "role: '%s'" % (GROUPS[i.groups[0].name])
