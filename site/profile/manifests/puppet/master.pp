@@ -45,6 +45,7 @@ class profile::puppet::master (
     reports         => 'store,puppetdb',
     environments    => 'directory',
     external_nodes  => '/etc/puppet/ec2-enc.py',
+    autosign        => true,
   }
 
   include puppet::agent
@@ -80,27 +81,5 @@ class profile::puppet::master (
     owner   => 'puppet',
     mode    => '700',
     content => template('profile/puppet/master/ec2-enc.py.erb'),
-  }
-
-  package { 'zlib1g-dev':
-    ensure => present
-  }
-
-  package { 'fog':
-    ensure   => present,
-    provider => 'gem',
-    require  => Package['zlib1g-dev'],
-  }
-
-  package { 'guid':
-    ensure   => present,
-    provider => gem,
-  }
-
-  file { '/root/.fog':
-    ensure  => present,
-    owner   => 'root',
-    mode    => '700',
-    content => template('profile/puppet/master/fog.erb'),
   }
 }

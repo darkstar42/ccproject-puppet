@@ -12,4 +12,3 @@ mod "jtopjian/reprepro",
     :git => 'https://github.com/jtopjian/puppet-reprepro',
     :ref => 'c15406b5568c17bb8495418e58c28e7d5d981bf9'
 mod "golja/gnupg", "1.1.0"
-mod "puppetlabs/cloud_provisioner", "1.1.4"
