@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+#
+# blackbox_initialize -- Enable blackbox for a GIT or HG repo.
+#
+#
+# Example:
+#    blackbox_initialize
+#
+
+set -e
+blackbox_home=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+source "${blackbox_home}/_blackbox_common.sh"
+
+_determine_vcs_base_and_type  # Sets VCS_TYPE
+
+if [[ $1 != 'yes' ]]; then
+  read -r -p "Enable blackbox for this $VCS_TYPE repo? (yes/no) " ans
+  if [[ $ans = 'no' || $ans = 'n' || $ans = '' ]]; then
+    echo 'Exiting...'
+    exit 1
+  fi
+fi
+
+change_to_vcs_root
+
+echo VCS_TYPE: $VCS_TYPE
+
+if [[ $VCS_TYPE = "git" || $VCS_TYPE = "hg" ]]; then
+  # Update .gitignore or .hgignore
+
+  IGNOREFILE="${REPOBASE}/.${VCS_TYPE}ignore"
+  if ! grep -sx >/dev/null 'pubring.gpg~' "$IGNOREFILE" ; then
+    echo 'pubring.gpg~' >>"$IGNOREFILE"
+  fi
+  if ! grep -sx >/dev/null 'secring.gpg' "$IGNOREFILE" ; then
+    echo 'secring.gpg' >>"$IGNOREFILE"
+  fi
+elif [[ $VCS_TYPE = "svn" ]]; then
+  # add file to svn ignore propset
+  IGNOREFILE="";
+  svn propset svn:ignore 'pubring.gpg~
+secring.gpg' .
+  svn commit -m "ignore file list"
+fi
+
+# Make directories
+mkdir -p "${KEYRINGDIR}"
+vcs_add "${KEYRINGDIR}"
+touch "$BLACKBOXDATA/$BB_ADMINS_FILE" "$BLACKBOXDATA/$BB_FILES_FILE"
+vcs_add "$IGNOREFILE" "$BLACKBOXDATA/$BB_ADMINS_FILE" "$BLACKBOXDATA/$BB_FILES_FILE"
+
+# Make a suggestion:
+echo
+echo
+echo 'NEXT STEP: You need to manually check these in:'
+echo '     ' $VCS_TYPE commit -m\'INITIALIZE BLACKBOX\' keyrings "$IGNOREFILE"
