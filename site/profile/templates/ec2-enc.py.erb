@@ -14,10 +14,15 @@ conn = boto.ec2.connect_to_region( "us-east-1",
   aws_access_key_id='<%= scope.function_hiera(['aws::accessKeyId']) %>',
   aws_secret_access_key='<%= scope.function_hiera(['aws::secretAccessKey']) %>' )
 
-for r in conn.get_all_instances():
-  for i in r.instances:
-    if i.public_dns_name:
-      #print "public: %s\tprivate: %s" % (i.public_dns_name, i.private_dns_name)
-      if i.private_dns_name.lower() ==  sys.argv[1].lower():
-        # print "match! " + str(i.groups[0].name)
-        print "classes:\n  %s:" % (GROUPS[i.groups[0].name])
+print "---"
+
+if sys.argv[1].lower() == 'puppet.cc.gernox.de':
+  print "classes:\n  %s:" % (GROUPS['ccproject-puppet'])
+else:
+  for r in conn.get_all_instances():
+    for i in r.instances:
+      if i.public_dns_name:
+        #print "public: %s\tprivate: %s" % (i.public_dns_name, i.private_dns_name)
+        if i.private_dns_name.lower() ==  sys.argv[1].lower():
+          # print "match! " + str(i.groups[0].name)
+          print "classes:\n  %s:" % (GROUPS[i.groups[0].name])

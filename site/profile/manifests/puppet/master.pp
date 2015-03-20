@@ -44,6 +44,7 @@ class profile::puppet::master (
     storeconfigs    => true,
     reports         => 'store,puppetdb',
     environments    => 'directory',
+    external_nodes  => 'ec2-enc.py',
   }
 
   include puppet::agent
@@ -59,18 +60,25 @@ class profile::puppet::master (
   class { 'puppetboard::apache::conf': }
 
   gnupg_key { 'deployment_sec':
-    ensure => present,
-    key_id => '5A281CD4',
-    user   => 'root',
+    ensure     => present,
+    key_id     => '5A281CD4',
+    user       => 'root',
     key_source => 'puppet:///modules/profile/puppet/master/deploymentKey_sec',
-    key_type => private,
+    key_type   => private,
   }
 
   gnupg_key { 'deployment_pub':
-    ensure => present,
-    key_id => '5A281CD4',
-    user   => 'root',
+    ensure     => present,
+    key_id     => '5A281CD4',
+    user       => 'root',
     key_source => 'puppet:///modules/profile/puppet/master/deploymentKey_pub',
-    key_type => public,
+    key_type   => public,
+  }
+
+  file { '/etc/puppet/ec2-enc.py':
+    ensure  => present,
+    owner   => 'puppet',
+    mode    => '700',
+    content => template('profile/puppet/master/ec2-enc.py.erb'),
   }
 }
