@@ -3,7 +3,7 @@ class profile::reprepro {
   $basedir = '/var/lib/apt/repo'
 
   # Main reprepro class
-  class { 'reprepro':
+  class { '::reprepro':
     basedir => $basedir,
   }
 
