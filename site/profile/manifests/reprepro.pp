@@ -6,18 +6,18 @@ class profile::reprepro {
   class { '::reprepro':
     basedir => $basedir,
   }->
-  gnupg_key { 'reprepro_pub':
+  gnupg_key { 'reprepro-public-key':
     ensure     => present,
-    key_id     => '5A281CD4',
+    key_id     => '7DFF0636',
     user       => 'reprepro',
-    key_source => 'puppet:///modules/profile/puppet/master/deploymentKey_pub',
+    key_source => 'puppet:///modules/profile/reprepro/public.key',
     key_type   => public,
   }->
-  gnupg_key { 'reprepro_sec':
+  gnupg_key { 'reprepro-signing-key':
     ensure     => present,
-    key_id     => '5A281CD4',
+    key_id     => '2B95C5A0',
     user       => 'reprepro',
-    key_source => 'puppet:///modules/profile/puppet/master/deploymentKey_sec',
+    key_source => 'puppet:///modules/profile/reprepro/signing.key',
     key_type   => private,
   }
 
@@ -36,7 +36,7 @@ class profile::reprepro {
     architectures => 'amd64',
     components    => 'main',
     description   => 'Package repository for deployment',
-    sign_with     => '5A281CD4',
+    sign_with     => '2B95C5A0',
     not_automatic => 'No',
   }
 
