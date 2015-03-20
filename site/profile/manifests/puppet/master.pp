@@ -44,7 +44,7 @@ class profile::puppet::master (
     storeconfigs    => true,
     reports         => 'store,puppetdb',
     environments    => 'directory',
-    external_nodes  => 'ec2-enc.py',
+    external_nodes  => '/etc/puppet/ec2-enc.py',
   }
 
   include puppet::agent
