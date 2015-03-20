@@ -10,3 +10,4 @@ pubring.gpg~
 secring.gpg
 site/profile/files/puppet/master/deploymentKey_pub
 site/profile/files/puppet/master/deploymentKey_sec
+hieradata/blackbox.yaml

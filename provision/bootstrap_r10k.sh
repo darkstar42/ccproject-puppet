@@ -13,6 +13,7 @@ cat > /etc/puppet/hiera.yaml <<EOH
 :hierarchy:
     - "nodes/%{::clientcert}"
     - "role/%{role}"
+    - "blackbox"
     - "common"
 EOH
 
