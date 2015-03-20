@@ -8,3 +8,4 @@
 install_log*
 pubring.gpg~
 secring.gpg
+site/profile/files/puppet/master/deploymentKey_pub
