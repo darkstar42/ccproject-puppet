@@ -3,6 +3,8 @@ class profile::deploy {
     ensure         => present,
     purge_ssh_keys => true,
     managehome     => true,
+    home           => '/home/deployment',
+    shell          => '/bin/bash',
   }->
   ssh_authorized_key { 'deployment':
     user => 'deployment',
