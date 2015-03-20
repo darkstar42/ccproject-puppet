@@ -9,3 +9,4 @@ mod "puppetboard",
     :ref => 'b4db602de0cc0bd4b1bb8b8cdc21b781e971974b'
 mod "stankevich/python", "1.8.3"
 mod "jtopjian/reprepro", "1.5.0"
+mod "willdurand/nodejs", "1.8.5"
