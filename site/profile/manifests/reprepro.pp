@@ -5,6 +5,20 @@ class profile::reprepro {
   # Main reprepro class
   class { '::reprepro':
     basedir => $basedir,
+  }->
+  gnupg_key { 'reprepro_pub':
+    ensure     => present,
+    key_id     => '5A281CD4',
+    user       => 'reprepro',
+    key_source => 'puppet:///modules/profile/puppet/master/deploymentKey_pub',
+    key_type   => public,
+  }->
+  gnupg_key { 'reprepro_sec':
+    ensure     => present,
+    key_id     => '5A281CD4',
+    user       => 'reprepro',
+    key_source => 'puppet:///modules/profile/puppet/master/deploymentKey_sec',
+    key_type   => private,
   }
 
   reprepro::repository { 'localpkgs':
@@ -22,7 +36,7 @@ class profile::reprepro {
     architectures => 'amd64',
     components    => 'main',
     description   => 'Package repository for deployment',
-    sign_with     => 'DD74E9C9',
+    sign_with     => '5A281CD4',
     not_automatic => 'No',
   }
 

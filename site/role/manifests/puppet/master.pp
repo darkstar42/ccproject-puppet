@@ -3,4 +3,5 @@ class role::puppet::master {
   include profile::gnupg
   include profile::puppet::master
   include profile::reprepro
+  include profile::deploy
 }
