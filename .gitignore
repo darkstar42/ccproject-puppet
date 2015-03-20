@@ -6,3 +6,5 @@
 
 /modules
 install_log*
+pubring.gpg~
+secring.gpg
