@@ -81,4 +81,26 @@ class profile::puppet::master (
     mode    => '700',
     content => template('profile/puppet/master/ec2-enc.py.erb'),
   }
+
+  package { 'zlib1g-dev':
+    ensure => present
+  }
+
+  package { 'fog':
+    ensure   => present,
+    provider => 'gem',
+    require  => Package['zlib1g-dev'],
+  }
+
+  package { 'guid':
+    ensure   => present,
+    provider => gem,
+  }
+
+  file { '/root/.fog':
+    ensure  => present,
+    owner   => 'root',
+    mode    => '700',
+    content => template('profile/puppet/master/fog.erb'),
+  }
 }
