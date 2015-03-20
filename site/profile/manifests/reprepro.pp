@@ -45,5 +45,15 @@ class profile::reprepro {
     docroot        => '/var/lib/apt/repo/localpkgs',
     manage_docroot => false,
     require        => Reprepro::Distribution['trusty'],
+    custom_fragment => '
+<Directory /var/lib/apt/repo/localpkgs/conf>
+  Order Deny,Allow
+  Deny from All
+</Directory>
+
+<Directory /var/lib/apt/repo/localpkgs/db>
+  Order Deny,Allow
+  Deny from All
+</Directory>',
   }
 }
