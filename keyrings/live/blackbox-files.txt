@@ -1,1 +1,2 @@
 site/profile/files/puppet/master/deploymentKey_pub
+site/profile/files/puppet/master/deploymentKey_sec
