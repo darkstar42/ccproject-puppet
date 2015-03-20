@@ -82,4 +82,8 @@ class profile::puppet::master (
     mode    => '700',
     content => template('profile/puppet/master/ec2-enc.py.erb'),
   }
+
+  package { 'python-boto':
+    ensure => present,
+  }
 }
