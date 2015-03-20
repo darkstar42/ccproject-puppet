@@ -8,4 +8,6 @@ mod "puppetboard",
     :git => 'git://github.com/jhofeditz/puppet-module-puppetboard',
     :ref => 'b4db602de0cc0bd4b1bb8b8cdc21b781e971974b'
 mod "stankevich/python", "1.8.3"
-mod "jtopjian/reprepro", "1.5.0"
+mod "jtopjian/reprepro",
+    :git => 'https://github.com/jtopjian/puppet-reprepro',
+    :ref => 'c15406b5568c17bb8495418e58c28e7d5d981bf9'
