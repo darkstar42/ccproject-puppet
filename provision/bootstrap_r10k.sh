@@ -62,4 +62,7 @@ echo "APPLYING R10K"
 
 /usr/local/bin/r10k deploy environment -p production --puppetfile --verbose debug
 /etc/init.d/puppetmaster start
+
+cd /etc/puppet/environments/production/ && ./bin/blackbox_postdeploy
+
 /usr/bin/puppet agent -t
