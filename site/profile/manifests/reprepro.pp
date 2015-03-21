@@ -19,6 +19,12 @@ class profile::reprepro {
     user       => 'reprepro',
     key_source => 'puppet:///modules/profile/reprepro/signing.key',
     key_type   => private,
+  }->
+  cron { findNewDebs:
+    command => "mv /tmp/*.deb /var/lib/apt/repo/localpkgs/tmp/trusty/ && chown reprepro:reprepro /var/lib/apt/repo/localpkgs/tmp/trusty/*",
+    user    => root,
+    hour    => '*',
+    minute  => '*/2'
   }
 
   reprepro::repository { 'localpkgs':
