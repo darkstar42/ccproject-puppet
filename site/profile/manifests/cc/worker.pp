@@ -14,6 +14,9 @@ class profile::cc::worker {
   service { "ccproject-worker":
     ensure => running,
     enable => true,
+    hasrestart => false,
+    hasstatus => true,
+    status => '/usr/sbin/service ccproject-worker status | grep "running"',
     require => Package["ccproject-worker"],
   }
 }
