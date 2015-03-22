@@ -12,11 +12,11 @@ class profile::cc::worker {
     content => template('profile/cc/worker/aws.json.erb'),
   }->
   service { "ccproject-worker":
-    ensure => running,
-    enable => true,
+    ensure     => running,
+    enable     => true,
     hasrestart => false,
-    hasstatus => true,
-    status => '/usr/sbin/service ccproject-worker status | grep "running"',
-    require => Package["ccproject-worker"],
+    hasstatus  => true,
+    status     => '/usr/sbin/service ccproject-worker status | grep "running"',
+    require    => Class['::nodejs'],
   }
 }
