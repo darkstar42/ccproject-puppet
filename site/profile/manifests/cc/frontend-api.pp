@@ -12,11 +12,11 @@ class profile::cc::frontend-api {
     content => template('profile/cc/frontend-api/aws.json.erb'),
   }->
   service { "ccproject-frontend-api":
-    ensure => running,
-    enable => true,
+    ensure     => running,
+    enable     => true,
     hasrestart => false,
-    hasstatus => true,
-    status => '/usr/sbin/service ccproject-frontend-api status | grep "running"',
-    require => Package["ccproject-frontend-api"],
+    hasstatus  => true,
+    status     => '/usr/sbin/service ccproject-frontend-api status | grep "running"',
+    require    => Class['::nodejs'],
   }
 }
