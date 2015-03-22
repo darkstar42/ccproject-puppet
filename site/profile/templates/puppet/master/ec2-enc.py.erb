@@ -8,7 +8,12 @@ import sys
 
 # EC2Group: Puppet Class
 #GROUPS = {'default': 'role::default', 'web': 'role::web', 'app': 'role::app'}
-GROUPS = {'ccproject-puppet': 'role::puppet::master', 'ccproject-frontend': 'role::frontend', 'ccproject-worker': 'role::worker'}
+GROUPS = {
+    'ccproject-puppet': 'role::puppet::master',
+    'ccproject-frontend': 'role::frontend',
+    'ccproject-frontend-api': 'role::frontend-api',
+    'ccproject-worker': 'role::worker'
+}
 
 conn = boto.ec2.connect_to_region( "us-east-1",
   aws_access_key_id='<%= scope.function_hiera(['aws::accessKeyId']) %>',

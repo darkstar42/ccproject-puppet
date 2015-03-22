@@ -1,0 +1,7 @@
+{
+  "AWS": {
+    "AccessKeyId": "<%= scope.function_hiera(['aws::accessKeyId']) %>",
+    "SecretAccessKey": "<%= scope.function_hiera(['aws::secretAccessKey']) %>",
+    "Region": "us-east-1"
+  }
+}
