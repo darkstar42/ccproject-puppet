@@ -1,6 +1,7 @@
 class profile::cc::worker {
   require profile::repo
-  include profile::nodejs
+  require profile::nodejs
+  require profile::docker
 
   package { "ccproject-worker":
     ensure => latest;
