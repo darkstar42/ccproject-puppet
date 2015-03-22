@@ -8,5 +8,6 @@ class profile::puppet::agent (
     puppet_server             => $master,
     environment               => $environment,
     templatedir               => undef,
+    puppet_run_interval       => 5,
   }
 }
