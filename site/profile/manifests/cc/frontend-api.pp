@@ -3,7 +3,8 @@ class profile::cc::frontend-api {
   require profile::nodejs
 
   package { "ccproject-frontend-api":
-    ensure => latest;
+    ensure  => latest,
+    notify  => Service["ccproject-frontend-api"],
   }->
   file { '/opt/ccproject-frontend-api/config/aws.json':
     ensure  => present,
@@ -14,7 +15,7 @@ class profile::cc::frontend-api {
   service { "ccproject-frontend-api":
     ensure     => running,
     enable     => true,
-    hasrestart => false,
+    hasrestart => true,
     hasstatus  => true,
     status     => '/usr/sbin/service ccproject-frontend-api status | grep "running"',
     require    => Class['::nodejs'],

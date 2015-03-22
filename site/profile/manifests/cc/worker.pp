@@ -4,7 +4,8 @@ class profile::cc::worker {
   require profile::docker
 
   package { "ccproject-worker":
-    ensure => latest;
+    ensure  => latest,
+    notify  => Service["ccproject-worker"],
   }->
   file { '/opt/ccproject-worker/config/aws.json':
     ensure  => present,
@@ -15,7 +16,7 @@ class profile::cc::worker {
   service { "ccproject-worker":
     ensure     => running,
     enable     => true,
-    hasrestart => false,
+    hasrestart => true,
     hasstatus  => true,
     status     => '/usr/sbin/service ccproject-worker status | grep "running"',
     require    => Class['::nodejs'],
